@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Diocese Administration</title>
+
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+  <section id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+      <div class="admin-logo">AD</div>
+
+      <p class="eyebrow">ADMINISTRATION PORTAL</p>
+
+      <h1>Welcome Back</h1>
+
+      <p class="login-description">
+        Sign in to manage diocesan news, events, and messages.
+      </p>
+
+      <form id="loginForm">
+        <label for="adminEmail">Email Address</label>
+        <input id="adminEmail"
+               type="email"
+               autocomplete="username"
+               required>
+
+        <label for="adminPassword">Password</label>
+        <input id="adminPassword"
+               type="password"
+               autocomplete="current-password"
+               required>
+
+        <button class="admin-button" type="submit">
+          Sign In
+        </button>
+
+        <p id="loginStatus" role="status"></p>
+      </form>
+
+      <a href="../index.html" class="back-link">
+        Return to Website
+      </a>
+    </div>
+
+  </section>
+
+  <div id="dashboard" class="dashboard" hidden>
+
+    <aside class="sidebar">
+
+      <div class="sidebar-brand">
+        <div class="admin-logo">AD</div>
+        <div>
+          <strong>DIOCESE ADMIN</strong>
+          <small>Zaki-Biam</small>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="overview">
+          Overview
+        </button>
+
+        <button class="nav-item" data-view="news">
+          Manage News
+        </button>
+
+        <button class="nav-item" data-view="events">
+          Manage Events
+        </button>
+
+        <button class="nav-item" data-view="messages">
+          Contact Messages
+        </button>
+      </nav>
+
+      <button id="logoutButton" class="logout-button">
+        Sign Out
+      </button>
+
+    </aside>
+
+    <main class="dashboard-main">
+
+      <header class="dashboard-header">
+        <div>
+          <p class="eyebrow">CONTENT MANAGEMENT</p>
+          <h1 id="pageTitle">Dashboard Overview</h1>
+        </div>
+
+        <a href="index.html" target="_blank" class="view-site">
+          View Website ↗
+        </a>
+      </header>
+
+      <p id="dashboardStatus" role="status"></p>
+
+      <section id="overviewView" class="dashboard-view">
+
+        <div class="welcome-card">
+          <h2>Welcome to your dashboard</h2>
+          <p>
+            Manage diocesan news, upcoming events, and messages
+            received from website visitors.
+          </p>
+        </div>
+
+        <div class="stats-grid">
+
+          <article class="stat-card">
+            <span>Published News</span>
+            <strong id="newsCount">—</strong>
+          </article>
+
+          <article class="stat-card">
+            <span>Upcoming Events</span>
+            <strong id="eventsCount">—</strong>
+          </article>
+
+          <article class="stat-card">
+            <span>Contact Messages</span>
+            <strong id="messagesCount">—</strong>
+          </article>
+
+        </div>
+
+        <div class="panel">
+          <h2>Quick Actions</h2>
+
+          <div class="quick-actions">
+            <button class="admin-button" data-view="news">
+              Create News
+            </button>
+
+            <button class="admin-button secondary" data-view="events">
+              Add Event
+            </button>
+
+            <button class="admin-button secondary" data-view="messages">
+              View Messages
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="newsView" class="dashboard-view" hidden>
+
+        <div class="panel">
+          <h2>Create News Article</h2>
+
+          <form id="newsForm" class="admin-form">
+
+            <label for="newsTitle">Article Title</label>
+            <input id="newsTitle" maxlength="200" required>
+
+            <label for="newsContent">Article Content</label>
+            <textarea id="newsContent"
+                      rows="6"
+                      maxlength="20000"
+                      required></textarea>
+
+            <label for="newsImage">Image URL (optional)</label>
+            <input id="newsImage"
+                   type="url"
+                   maxlength="2000"
+                   placeholder="https://example.com/image.jpg">
+
+            <label class="checkbox-row">
+              <input id="newsPublished" type="checkbox">
+              Publish immediately
+            </label>
+
+            <button class="admin-button" type="submit">
+              Save Article
+            </button>
+
+          </form>
+        </div>
+
+        <div class="panel">
+          <h2>Existing News</h2>
+          <div id="newsList" class="record-list"></div>
+        </div>
+
+      </section>
+
+      <section id="eventsView" class="dashboard-view" hidden>
+
+        <div class="panel">
+          <h2>Create Church Event</h2>
+
+          <form id="eventForm" class="admin-form">
+
+            <label for="eventTitle">Event Title</label>
+            <input id="eventTitle" maxlength="200" required>
+
+            <label for="eventDescription">Description</label>
+            <textarea id="eventDescription"
+                      rows="5"
+                      maxlength="10000"></textarea>
+
+            <label for="eventDate">Date and Time</label>
+            <input id="eventDate" type="datetime-local" required>
+
+            <label for="eventLocation">Location</label>
+            <input id="eventLocation" maxlength="300">
+
+            <label for="eventImage">Image URL (optional)</label>
+            <input id="eventImage"
+                   type="url"
+                   maxlength="2000"
+                   placeholder="https://example.com/image.jpg">
+
+            <label class="checkbox-row">
+              <input id="eventPublished" type="checkbox">
+              Publish immediately
+            </label>
+
+            <button class="admin-button" type="submit">
+              Save Event
+            </button>
+
+          </form>
+        </div>
+
+        <div class="panel">
+          <h2>Existing Events</h2>
+          <div id="eventsList" class="record-list"></div>
+        </div>
+
+      </section>
+
+      <section id="messagesView" class="dashboard-view" hidden>
+
+        <div class="panel">
+          <h2>Visitor Messages</h2>
+          <p class="muted">
+            These messages are private and visible only to authorized administrators.
+          </p>
+
+          <div id="messagesList" class="record-list"></div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin.js"></script>
+
+</body>
+</html>
